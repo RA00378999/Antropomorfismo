@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O rosto que damos à máquina – autoavaliação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A1D21; --slate:#2E3A46; --mist:#EEF1F4; --line:#D9DEE3;
+    --orange:#D9572B; --teal:#3E7C8C; --gray:#5B6670; --soft:#8A94A0;
+    --bg:#F7F8F9; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 18px 48px}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;margin:0;line-height:1.2}
+  h1{font-size:30px}
+  h2{font-size:24px}
+  .tag{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:12px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--orange);flex:none}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .hero{background:var(--slate);color:#fff;border:none}
+  .hero .tag{color:#B7C3CC}
+  .hero p{color:#DCE3E8}
+  p{margin:12px 0}
+  .muted{color:var(--gray);font-size:14px}
+  .btn{appearance:none;border:none;border-radius:10px;padding:14px 20px;font:600 16px Inter,sans-serif;cursor:pointer;min-height:48px}
+  .btn-primary{background:var(--orange);color:#fff;width:100%}
+  .btn-primary:disabled{background:#E8B3A1;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--gray);border:1px solid var(--line)}
+  .row{display:flex;gap:10px;margin-top:18px}
+  .row .btn{flex:1}
+  ul.plain{padding-left:18px;margin:8px 0}
+  ul.plain li{margin:4px 0}
+  /* questionário */
+  .progress{height:6px;background:var(--mist);border-radius:6px;overflow:hidden;margin:6px 0 18px}
+  .progress > div{height:100%;background:var(--orange);width:0;transition:width .25s}
+  .qcount{font-size:13px;color:var(--gray)}
+  .qtext{font-family:"Source Serif 4",Georgia,serif;font-size:22px;font-weight:600;margin:6px 0 18px}
+  .scale{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;align-items:center;gap:12px;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font:500 15px Inter,sans-serif;color:var(--ink);cursor:pointer;min-height:48px}
+  .opt .n{width:28px;height:28px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none;color:var(--slate)}
+  .opt.sel{border-color:var(--orange);background:#FDF1EC}
+  .opt.sel .n{background:var(--orange);color:#fff}
+  /* resultado */
+  .score{display:flex;gap:12px;margin:16px 0}
+  .score > div{flex:1;background:var(--mist);border-radius:12px;padding:14px}
+  .score .big{font-family:"Source Serif 4",Georgia,serif;font-size:40px;font-weight:700;line-height:1}
+  .score .lbl{font-size:13px;color:var(--gray);margin-top:6px}
+  .a{color:var(--orange)} .c{color:var(--teal)}
+  .bars{margin:10px 0 4px}
+  .bar{margin:12px 0}
+  .bar .top{display:flex;justify-content:space-between;font-size:14px}
+  .bar .track{height:10px;background:var(--mist);border-radius:6px;overflow:hidden;margin-top:6px}
+  .bar .fill{height:100%;border-radius:6px}
+  .profile{border-left:none;background:#FDF1EC;border-radius:12px;padding:16px;margin:16px 0}
+  .profile h3{font-size:22px;margin-bottom:6px}
+  svg text{font-family:Inter,sans-serif}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.on{opacity:1}
+  .hidden{display:none}
+  footer{margin-top:24px;font-size:12px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- INÍCIO -->
+  <section id="v-start">
+    <div class="card hero">
+      <div class="tag"><span class="dot"></span>Seminário · TIDD</div>
+      <h1>O rosto que damos à máquina</h1>
+      <p>Uma autoavaliação rápida sobre como você interpreta sistemas de inteligência artificial: o quanto tende a humanizá-los e o quanto tende a negar-lhes qualquer forma de inteligência.</p>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3 style="font-size:19px">Como funciona</h3>
+      <ul class="plain">
+        <li>20 afirmações, cerca de 4 minutos.</li>
+        <li>Responda pelo que você costuma sentir e fazer, não pelo que acha correto.</li>
+        <li>Ao final, você vê seus índices, seu perfil e uma breve devolutiva.</li>
+      </ul>
+      <p class="muted">Nenhuma resposta é enviada ou guardada: tudo é calculado no seu próprio aparelho e desaparece ao fechar a página.</p>
+      <button class="btn btn-primary" id="b-start" style="margin-top:8px">Começar</button>
+    </div>
+    <footer>Instrumento didático, inspirado nas dimensões de escalas de antropomorfismo da literatura (IDAQ, Godspeed) e nos conceitos de Lucia Santaella. Não é um teste psicológico validado.</footer>
+  </section>
+
+  <!-- PERGUNTAS -->
+  <section id="v-quiz" class="hidden">
+    <div class="tag"><span class="dot"></span><span id="q-block">Bloco</span></div>
+    <div class="qcount" id="q-count"></div>
+    <div class="progress"><div id="q-bar"></div></div>
+    <div class="qtext" id="q-text"></div>
+    <div class="scale" id="q-opts"></div>
+    <div class="row">
+      <button class="btn btn-ghost" id="b-back">Voltar</button>
+      <button class="btn btn-primary" id="b-next" disabled>Avançar</button>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="v-result" class="hidden">
+    <div class="tag"><span class="dot"></span>Seu resultado</div>
+    <h2 id="r-title"></h2>
+
+    <div class="score">
+      <div><div class="big a" id="r-anth"></div><div class="lbl">Abertura a antropomorfizar<br>(0 a 100)</div></div>
+      <div><div class="big c" id="r-centr"></div><div class="lbl">Tendência antropocêntrica<br>(0 a 100)</div></div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:18px;margin-bottom:6px">Onde você está</h3>
+      <svg id="r-map" viewBox="0 0 320 300" width="100%" role="img" aria-label="Mapa de posição"></svg>
+      <p class="muted" style="margin:6px 0 0">Eixo horizontal: abertura a antropomorfizar. Eixo vertical: tendência antropocêntrica.</p>
+    </div>
+
+    <div class="profile" id="r-profile"></div>
+
+    <div class="card">
+      <h3 style="font-size:18px">Detalhe por dimensão</h3>
+      <div class="bars" id="r-bars"></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="font-size:18px">Devolutiva</h3>
+      <div id="r-feedback"></div>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-ghost" id="b-copy">Copiar resultado</button>
+      <button class="btn btn-ghost" id="b-redo">Refazer</button>
+    </div>
+    <footer>Instrumento didático, sem validação psicométrica. Os índices indicam tendências de resposta neste momento, não traços fixos de personalidade. Inspirado em Waytz, Cacioppo e Epley (2010), Bartneck et al. (2009) e Santaella, <i>Semiótica da IA</i> (2026).</footer>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// Dimensões: G = tendência geral a ver mente; I = antropomorfismo da IA; V = vínculo e confiança;
+// S = suspeita crítica (conta ao contrário no índice de antropomorfização); C = avesso antropocêntrico.
+const DIM = {
+  G:{name:'Tendência geral a ver mente nas coisas', color:'#D9572B'},
+  I:{name:'Atribuir mente à IA', color:'#D9572B'},
+  V:{name:'Vínculo e confiança afetiva', color:'#D9572B'},
+  S:{name:'Arte da suspeita', color:'#3E7C8C'},
+  C:{name:'Negar inteligência à máquina', color:'#3E7C8C'}
+};
+const Q = [
+  ['G','Quando meu computador ou celular trava, tenho a sensação de que ele “não quer” colaborar.'],
+  ['G','Costumo achar que meu animal de estimação (ou o de outra pessoa) entende o que sinto, quase como uma pessoa.'],
+  ['G','Já dei nome a um objeto, carro ou aparelho e falei com ele como se pudesse me ouvir.'],
+  ['G','Diante de uma paisagem ou de uma tempestade, às vezes sinto que a natureza tem algum tipo de intenção.'],
+  ['I','Quando um chatbot me responde de forma calorosa, tenho a impressão de que ele de fato se importa comigo.'],
+  ['I','Acho que os sistemas de IA mais avançados já compreendem o que dizem, e não apenas calculam respostas.'],
+  ['I','Quando a IA erra, sinto como se ela tivesse se distraído ou se enganado, como uma pessoa.'],
+  ['I','Acredito que, em alguma medida, a IA tem preferências e vontades próprias.'],
+  ['I','Já agradeci ou pedi desculpas a um assistente de IA sem pensar, como faria com alguém.'],
+  ['V','Às vezes prefiro conversar sobre um assunto pessoal com uma IA do que com uma pessoa.'],
+  ['V','Se uma IA me dá uma resposta segura e bem escrita, tendo a aceitá-la sem verificar.'],
+  ['V','Consigo imaginar sentir falta de um assistente de IA com quem converso todos os dias.'],
+  ['V','Sinto que a IA me entende melhor do que muitas pessoas.'],
+  ['S','Confiro as fontes antes de usar uma informação vinda de uma IA.'],
+  ['S','Lembro com frequência que as respostas da IA são produzidas por cálculo estatístico sobre textos humanos.'],
+  ['S','Fico mais atento justamente quando a IA soa muito simpática ou convincente.'],
+  ['C','A IA não pensa de forma alguma: só repete o que humanos já escreveram.'],
+  ['C','Chamar esses sistemas de “inteligentes” é um abuso de linguagem.'],
+  ['C','Criatividade é exclusivamente humana; o que a IA produz nunca pode ser chamado de criativo.'],
+  ['C','Uma formiga ou um polvo têm mais inteligência do que qualquer sistema de IA.']
+];
+const BLOCK = {G:'Coisas, animais e natureza', I:'Você e a IA', V:'Vínculo e confiança', S:'Seus hábitos', C:'Suas convicções'};
+const LABELS = ['Discordo totalmente','Discordo','Nem concordo nem discordo','Concordo','Concordo totalmente'];
+
+// ordem intercalada para evitar respostas em bloco
+const ORDER = [0,4,16,13,9,1,5,17,10,14,2,6,18,11,15,3,7,19,12,8];
+let ans = new Array(Q.length).fill(null);
+let pos = 0;
+
+const $ = id => document.getElementById(id);
+function show(v){ ['v-start','v-quiz','v-result'].forEach(x => $(x).classList.toggle('hidden', x !== v)); window.scrollTo(0,0); }
+
+function renderQ(){
+  const qi = ORDER[pos], [d, text] = Q[qi];
+  $('q-block').textContent = BLOCK[d];
+  $('q-count').textContent = `Afirmação ${pos+1} de ${Q.length}`;
+  $('q-bar').style.width = `${(pos)/Q.length*100}%`;
+  $('q-text').textContent = text;
+  const box = $('q-opts'); box.innerHTML = '';
+  LABELS.forEach((l, k) => {
+    const b = document.createElement('button');
+    b.className = 'opt' + (ans[qi] === k+1 ? ' sel' : '');
+    b.innerHTML = `<span class="n">${k+1}</span><span>${l}</span>`;
+    b.onclick = () => { ans[qi] = k+1; renderQ(); setTimeout(next, 220); };
+    box.appendChild(b);
+  });
+  $('b-next').disabled = ans[qi] === null;
+  $('b-next').textContent = pos === Q.length-1 ? 'Ver resultado' : 'Avançar';
+  $('b-back').style.visibility = pos === 0 ? 'hidden' : 'visible';
+}
+function next(){
+  const qi = ORDER[pos]; if (ans[qi] === null) return;
+  if (pos < Q.length-1){ pos++; renderQ(); } else result();
+}
+$('b-start').onclick = () => { pos = 0; show('v-quiz'); renderQ(); };
+$('b-next').onclick = next;
+$('b-back').onclick = () => { if (pos > 0){ pos--; renderQ(); } };
+$('b-redo').onclick = () => { ans = new Array(Q.length).fill(null); show('v-start'); };
+
+// 1..5 -> 0..100
+const pct = v => (v - 1) / 4 * 100;
+function dimScore(d){
+  const vals = Q.map((q,i) => q[0] === d ? ans[i] : null).filter(v => v !== null);
+  return vals.reduce((a,b) => a + pct(b), 0) / vals.length;
+}
+
+let last = null;
+function result(){
+  const s = {}; Object.keys(DIM).forEach(d => s[d] = dimScore(d));
+  // índice de antropomorfização: G (peso 1), I (peso 1,5), V (peso 1,5) e S invertido (peso 1)
+  const anth = Math.round((s.G*1 + s.I*1.5 + s.V*1.5 + (100 - s.S)*1) / 5);
+  const centr = Math.round(s.C);
+  const hiA = anth >= 50, hiC = centr >= 50;
+  let prof;
+  if (hiA && !hiC) prof = {t:'Encantamento', k:'enc'};
+  else if (!hiA && hiC) prof = {t:'Régua humana', k:'reg'};
+  else if (hiA && hiC) prof = {t:'Ambivalência', k:'amb'};
+  else prof = {t:'Cuidado e suspeita', k:'cui'};
+  const lvl = anth < 30 ? 'baixa' : anth < 50 ? 'moderada-baixa' : anth < 70 ? 'moderada-alta' : 'alta';
+
+  $('r-title').textContent = `Abertura ${lvl.replace('-',' ')} a antropomorfizar`;
+  $('r-anth').textContent = anth;
+  $('r-centr').textContent = centr;
+  drawMap(anth, centr);
+
+  const P = {
+    enc: ['Encantamento', 'Você tende a ler a IA como alguém: atribui compreensão, intenção ou afeto às respostas e aceita com facilidade a conversa como uma relação. É a face mais conhecida do antropomorfismo, a que o cinema explora em <i>Ela</i> e <i>Ex Machina</i>.'],
+    reg: ['Régua humana', 'Você tende a medir a máquina pela régua humana e, por ela, negar-lhe qualquer forma de inteligência. Santaella chama atenção para esse avesso do antropomorfismo: negar todo raciocínio aos sistemas também revela um preconceito antropocêntrico, como na pergunta de Sonny em <i>Eu, Robô</i>: “Você consegue?”.'],
+    amb: ['Ambivalência', 'Você combina as duas faces: na experiência, tende a humanizar a IA; nas convicções, tende a negar que ela seja inteligente. É uma posição comum, em que o discurso crítico convive com a projeção afetiva no uso cotidiano.'],
+    cui: ['Cuidado e suspeita', 'Você nem humaniza a IA com facilidade nem descarta de saída o que ela faz. É a posição mais próxima do que Santaella chama de arte do cuidado e arte da suspeita: abertura ao que o sistema pode oferecer, com verificação crítica do que ele produz.']
+  }[prof.k];
+  $('r-profile').innerHTML = `<div class="tag" style="margin-bottom:6px"><span class="dot"></span>Seu perfil</div><h3>${P[0]}</h3><p style="margin:0">${P[1]}</p>`;
+
+  const bars = $('r-bars'); bars.innerHTML = '';
+  ['G','I','V','S','C'].forEach(d => {
+    const v = Math.round(s[d]);
+    bars.insertAdjacentHTML('beforeend', `<div class="bar"><div class="top"><span>${DIM[d].name}</span><b>${v}</b></div><div class="track"><div class="fill" style="width:${v}%;background:${DIM[d].color}"></div></div></div>`);
+  });
+
+  // devolutiva personalizada
+  const fb = [];
+  if (s.I >= 60) fb.push('Você atribui com facilidade compreensão e intenção à IA. Vale lembrar a distinção do capítulo 8 de <i>Semiótica da IA</i>: o sistema simula sentir, e a simulação não é o sentir. O que parece um “eu” do outro lado é o objeto imediato do signo, não o objeto dinâmico.');
+  if (s.V >= 60) fb.push('Seu vínculo e sua confiança na IA são altos. É justamente aí que mora o maior risco apontado por Santaella: quando a máquina vira voz confiável, a suspeita se desfaz. Experimente verificar uma resposta “perfeita” antes de usá-la.');
+  if (s.S < 45) fb.push('A arte da suspeita aparece pouco nas suas respostas. Um hábito simples ajuda: diante de uma resposta muito segura ou muito simpática, perguntar de onde ela pode ter vindo e conferir ao menos uma fonte.');
+  if (s.S >= 70) fb.push('Você pratica a arte da suspeita: confere fontes e lembra como as respostas são produzidas. É o contrapeso que mantém o uso da IA produtivo sem cair no encantamento.');
+  if (s.C >= 60) fb.push('Você tende a negar inteligência à máquina. Para Peirce, a ação do signo já é ação inteligente, com diferenças de grau; Andy Clark mostra inteligência até numa barata. Talvez a pergunta mais fértil não seja “a IA pensa?”, mas “que tipo de pensamento é esse, e em que ele difere do humano?”.');
+  if (s.G >= 65) fb.push('Você vê mente com facilidade também em objetos, animais e natureza. Isso indica um traço geral, anterior à IA, e ajuda a entender por que os sistemas que falam como nós são tão convincentes para você.');
+  if (s.C < 35 && anth < 40) fb.push('Você reconhece a inteligência do sistema sem confundi-la com a humana: uma leitura que evita os dois extremos discutidos no seminário.');
+  if (!fb.length) fb.push('Suas respostas ficaram em zonas intermediárias em quase todas as dimensões. Observe, nos próximos usos de IA, em quais situações você se pega humanizando a resposta e em quais a descarta de saída.');
+  fb.push('<span class="muted">Lembrete: o antropomorfismo acontece no interpretante, isto é, em quem interpreta, e não na máquina. Estes números descrevem como você lê a IA hoje, não o que a IA é.</span>');
+  $('r-feedback').innerHTML = fb.map(t => `<p>${t}</p>`).join('');
+
+  last = {anth, centr, prof: P[0], s};
+  show('v-result');
+}
+
+function drawMap(a, c){
+  const W = 320, H = 300, L = 40, T = 14, S = 250; // área quadrada
+  const x = L + a/100*S, y = T + (100-c)/100*S;
+  const q = (x0,y0,label,fill) => `<rect x="${x0}" y="${y0}" width="${S/2}" height="${S/2}" fill="${fill}"/><text x="${x0+8}" y="${y0+18}" font-size="11" fill="#5B6670">${label}</text>`;
+  $('r-map').innerHTML =
+    q(L, T, 'Régua humana', '#EAF2F4') + q(L+S/2, T, 'Ambivalência', '#F4EFEA') +
+    q(L, T+S/2, 'Cuidado e suspeita', '#F3F5F6') + q(L+S/2, T+S/2, 'Encantamento', '#FBEDE7') +
+    `<rect x="${L}" y="${T}" width="${S}" height="${S}" fill="none" stroke="#D9DEE3"/>` +
+    `<text x="${L+S/2}" y="${T+S+28}" text-anchor="middle" font-size="12" fill="#5B6670">antropomorfizar →</text>` +
+    `<text x="14" y="${T+S/2}" text-anchor="middle" font-size="12" fill="#5B6670" transform="rotate(-90 14 ${T+S/2})">antropocentrismo →</text>` +
+    `<circle cx="${x}" cy="${y}" r="11" fill="#D9572B" stroke="#fff" stroke-width="3"/>` +
+    `<text x="${x}" y="${y-18}" text-anchor="middle" font-size="12" font-weight="600" fill="#1A1D21">você</text>`;
+}
+
+function toast(t){ const el = $('toast'); el.textContent = t; el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 1800); }
+$('b-copy').onclick = async () => {
+  if (!last) return;
+  const s = last.s;
+  const txt = `O rosto que damos à máquina – meu resultado\n` +
+    `Abertura a antropomorfizar: ${last.anth}/100\nTendência antropocêntrica: ${last.centr}/100\nPerfil: ${last.prof}\n` +
+    `Dimensões – mente nas coisas ${Math.round(s.G)}, mente na IA ${Math.round(s.I)}, vínculo ${Math.round(s.V)}, suspeita ${Math.round(s.S)}, negar inteligência ${Math.round(s.C)}`;
+  try { await navigator.clipboard.writeText(txt); toast('Resultado copiado'); }
+  catch(e){ toast('Não foi possível copiar neste aparelho'); }
+};
+</script>
+</body>
+</html>
